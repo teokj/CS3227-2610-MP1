@@ -17,6 +17,7 @@
     <Label text="Track all your job applications&#10;in one place!" textAlignment="CENTER"/>
     <Button text="Add Application"
             onAction="#handleAddApplication"/>
-    <Label text="No applications recorded yet. Add your first application to get started!"
-           textAlignment="CENTER" wrapText="true"/>
+    <VBox fx:id="applicationListBox"
+          spacing="8.0"
+          alignment="CENTER" />
 </VBox>

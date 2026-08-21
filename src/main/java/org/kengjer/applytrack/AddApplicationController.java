@@ -82,6 +82,12 @@ public class AddApplicationController {
             return;
         }
 
+        if (followUpDatePicker.getValue() != null
+                && followUpDatePicker.getValue().isBefore(applicationDatePicker.getValue())) {
+            errorLabel.setText("Follow-up date cannot be before application date.");
+            return;
+        }
+
         if (sourceField.getText() == null || sourceField.getText().isBlank()) {
             errorLabel.setText("Source is required.");
             return;
@@ -89,14 +95,14 @@ public class AddApplicationController {
 
         errorLabel.setText("");
 
-        JobApplication application = new JobApplication(
-                1,
-                companyField.getText(),
-                positionField.getText(),
-                categoryComboBox.getValue(),
-                applicationDatePicker.getValue(),
-                sourceField.getText()
-        );
+        JobApplication application =
+                HelloApplication.getApplicationManager().addApplication(
+                        companyField.getText(),
+                        positionField.getText(),
+                        categoryComboBox.getValue(),
+                        applicationDatePicker.getValue(),
+                        sourceField.getText()
+                );
 
         application.setFollowUpDate(followUpDatePicker.getValue());
         application.setNotes(notesArea.getText());

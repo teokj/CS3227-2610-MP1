@@ -158,6 +158,21 @@ public class JobApplicationTest {
     }
 
     @Test
+    void setFollowUpDate_beforeApplicationDate_throwsAndPreservesExistingValue() {
+        JobApplication application = createValidApplication();
+        LocalDate validFollowUpDate = LocalDate.of(2026, 8, 26);
+
+        application.setFollowUpDate(validFollowUpDate);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> application.setFollowUpDate(LocalDate.of(2026, 8, 18))
+        );
+
+        assertEquals(validFollowUpDate, application.getFollowUpDate());
+    }
+
+    @Test
     void setNotes_normalValue_storesValueCorrectly() {
         JobApplication application = createValidApplication();
 
