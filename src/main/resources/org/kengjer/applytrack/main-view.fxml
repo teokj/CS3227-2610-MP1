@@ -5,14 +5,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml">
+<VBox alignment="CENTER"
+      spacing="20.0"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.kengjer.applytrack.MainViewController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
     <Label text="ApplyTrack"/>
     <Label text="Track all your job applications&#10;in one place!" textAlignment="CENTER"/>
-    <Button text="Add Application"/>
+    <Button text="Add Application"
+            onAction="#handleAddApplication"/>
     <Label text="No applications recorded yet. Add your first application to get started!"
            textAlignment="CENTER" wrapText="true"/>
 </VBox>
