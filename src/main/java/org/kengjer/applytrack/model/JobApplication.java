@@ -134,6 +134,11 @@ public class JobApplication {
     }
 
     public void setFollowUpDate(LocalDate followUpDate) {
+        if (followUpDate != null && followUpDate.isBefore(applicationDate)) {
+            throw new IllegalArgumentException(
+                    "Follow-up date cannot be before application date."
+            );
+        }
         this.followUpDate = followUpDate;
     }
 
