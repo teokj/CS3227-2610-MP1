@@ -116,6 +116,13 @@ public class JobApplication {
         if (applicationDate == null) {
             throw new IllegalArgumentException("Application date cannot be null.");
         }
+
+        if (followUpDate != null && followUpDate.isBefore(applicationDate)) {
+            throw new IllegalArgumentException(
+                    "Application date cannot be after follow-up date."
+            );
+        }
+
         this.applicationDate = applicationDate;
     }
 
