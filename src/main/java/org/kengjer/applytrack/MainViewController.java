@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import org.kengjer.applytrack.model.JobApplication;
 
@@ -34,13 +34,31 @@ public class MainViewController {
         for (JobApplication application :
                 HelloApplication.getApplicationManager().getApplications()) {
 
-            Label applicationLabel = new Label(
+            Button applicationButton = new Button(
                     application.getId() + ". "
                             + application.getCompany() + " - "
                             + application.getPosition()
             );
 
-            applicationListBox.getChildren().add(applicationLabel);
+            applicationButton.setOnAction(event -> {
+                try {
+                    FXMLLoader fxmlLoader =
+                            new FXMLLoader(HelloApplication.class.getResource("add-application-view.fxml"));
+
+                    Scene scene = new Scene(fxmlLoader.load());
+
+                    AddApplicationController controller = fxmlLoader.getController();
+                    controller.setApplicationToEdit(application);
+
+                    Stage stage = (Stage) applicationButton.getScene().getWindow();
+                    stage.setScene(scene);
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            applicationListBox.getChildren().add(applicationButton);
         }
     }
 }

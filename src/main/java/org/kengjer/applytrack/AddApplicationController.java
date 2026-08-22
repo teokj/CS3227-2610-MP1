@@ -41,6 +41,8 @@ public class AddApplicationController {
     @FXML
     private Label errorLabel;
 
+    private JobApplication applicationToEdit;
+
     @FXML
     public void initialize() {
         categoryComboBox.getItems().setAll(JobCategory.values());
@@ -95,17 +97,28 @@ public class AddApplicationController {
 
         errorLabel.setText("");
 
-        JobApplication application =
-                HelloApplication.getApplicationManager().addApplication(
-                        companyField.getText(),
-                        positionField.getText(),
-                        categoryComboBox.getValue(),
-                        applicationDatePicker.getValue(),
-                        sourceField.getText()
-                );
+        if (applicationToEdit == null) {
+            JobApplication application =
+                    HelloApplication.getApplicationManager().addApplication(
+                            companyField.getText(),
+                            positionField.getText(),
+                            categoryComboBox.getValue(),
+                            applicationDatePicker.getValue(),
+                            sourceField.getText()
+                    );
 
-        application.setFollowUpDate(followUpDatePicker.getValue());
-        application.setNotes(notesArea.getText());
+            application.setFollowUpDate(followUpDatePicker.getValue());
+            application.setNotes(notesArea.getText());
+
+        } else {
+            applicationToEdit.setCompany(companyField.getText());
+            applicationToEdit.setPosition(positionField.getText());
+            applicationToEdit.setCategory(categoryComboBox.getValue());
+            applicationToEdit.setApplicationDate(applicationDatePicker.getValue());
+            applicationToEdit.setSource(sourceField.getText());
+            applicationToEdit.setFollowUpDate(followUpDatePicker.getValue());
+            applicationToEdit.setNotes(notesArea.getText());
+        }
 
         FXMLLoader fxmlLoader =
                 new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
@@ -117,5 +130,17 @@ public class AddApplicationController {
                 .getWindow();
 
         stage.setScene(scene);
+    }
+
+    void setApplicationToEdit(JobApplication application) {
+        this.applicationToEdit = application;
+
+        companyField.setText(application.getCompany());
+        positionField.setText(application.getPosition());
+        categoryComboBox.setValue(application.getCategory());
+        applicationDatePicker.setValue(application.getApplicationDate());
+        sourceField.setText(application.getSource());
+        followUpDatePicker.setValue(application.getFollowUpDate());
+        notesArea.setText(application.getNotes());
     }
 }

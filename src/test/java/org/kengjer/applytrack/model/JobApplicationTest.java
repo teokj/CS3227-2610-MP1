@@ -245,6 +245,21 @@ public class JobApplicationTest {
         assertEquals(ApplicationStatus.APPLIED, application.getStatus());
     }
 
+    @Test
+    void setApplicationDate_afterFollowUpDate_throwsAndPreservesExistingValue() {
+        JobApplication application = createValidApplication();
+        LocalDate followUpDate = LocalDate.of(2026, 8, 26);
+
+        application.setFollowUpDate(followUpDate);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> application.setApplicationDate(LocalDate.of(2026, 8, 27))
+        );
+
+        assertEquals(LocalDate.of(2026, 8, 19), application.getApplicationDate());
+    }
+
     private JobApplication createValidApplication() {
         return new JobApplication(
                 1,
