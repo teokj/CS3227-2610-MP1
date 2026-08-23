@@ -113,7 +113,7 @@ public class ApplicationDetailsController {
                     FXMLLoader fxmlLoader =
                             new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
 
-                    Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+                    Scene scene = new Scene(fxmlLoader.load(), 600, 500);
 
                     Stage stage = (Stage) ((javafx.scene.Node) event.getSource())
                             .getScene()
@@ -133,7 +133,7 @@ public class ApplicationDetailsController {
         FXMLLoader fxmlLoader =
                 new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 500);
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource())
                 .getScene()
