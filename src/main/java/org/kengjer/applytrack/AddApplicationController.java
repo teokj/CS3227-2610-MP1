@@ -41,6 +41,9 @@ public class AddApplicationController {
     @FXML
     private Label errorLabel;
 
+    @FXML
+    private Label formTitleLabel;
+
     private JobApplication applicationToEdit;
 
     @FXML
@@ -134,6 +137,8 @@ public class AddApplicationController {
 
     void setApplicationToEdit(JobApplication application) {
         this.applicationToEdit = application;
+
+        formTitleLabel.setText("Edit Application");
 
         companyField.setText(application.getCompany());
         positionField.setText(application.getPosition());

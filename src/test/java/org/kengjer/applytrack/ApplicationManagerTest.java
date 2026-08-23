@@ -126,6 +126,57 @@ public class ApplicationManagerTest {
         assertEquals(1, secondApplication.getId());
     }
 
+    @Test
+    void removeApplication_existingApplication_removesItFromList() {
+        ApplicationManager manager = new ApplicationManager();
+
+        JobApplication first = manager.addApplication(
+                "Google",
+                "Software Engineer Intern",
+                JobCategory.TECHNOLOGY,
+                LocalDate.of(2026, 8, 23),
+                "LinkedIn"
+        );
+
+        JobApplication second = manager.addApplication(
+                "DBS",
+                "Technology Intern",
+                JobCategory.FINANCE,
+                LocalDate.of(2026, 8, 23),
+                "Company Website"
+        );
+
+        manager.removeApplication(first);
+
+        assertEquals(1, manager.getApplications().size());
+        assertEquals(second, manager.getApplications().get(0));
+    }
+
+    @Test
+    void removeApplication_thenAddNewApplication_doesNotReuseDeletedId() {
+        ApplicationManager manager = new ApplicationManager();
+
+        JobApplication first = manager.addApplication(
+                "Google",
+                "Software Engineer Intern",
+                JobCategory.TECHNOLOGY,
+                LocalDate.of(2026, 8, 23),
+                "LinkedIn"
+        );
+
+        manager.removeApplication(first);
+
+        JobApplication second = manager.addApplication(
+                "DBS",
+                "Technology Intern",
+                JobCategory.FINANCE,
+                LocalDate.of(2026, 8, 23),
+                "Company Website"
+        );
+
+        assertEquals(2, second.getId());
+    }
+
     private JobApplication addValidApplication(ApplicationManager manager, String company) {
         return manager.addApplication(
                 company,

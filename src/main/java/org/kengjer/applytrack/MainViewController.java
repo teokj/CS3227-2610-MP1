@@ -43,12 +43,12 @@ public class MainViewController {
             applicationButton.setOnAction(event -> {
                 try {
                     FXMLLoader fxmlLoader =
-                            new FXMLLoader(HelloApplication.class.getResource("add-application-view.fxml"));
+                            new FXMLLoader(HelloApplication.class.getResource("application-details-view.fxml"));
 
                     Scene scene = new Scene(fxmlLoader.load());
 
-                    AddApplicationController controller = fxmlLoader.getController();
-                    controller.setApplicationToEdit(application);
+                    ApplicationDetailsController controller = fxmlLoader.getController();
+                    controller.setApplication(application);
 
                     Stage stage = (Stage) applicationButton.getScene().getWindow();
                     stage.setScene(scene);

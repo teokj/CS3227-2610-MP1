@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER"
+      spacing="12.0"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.kengjer.applytrack.ApplicationDetailsController">
+
+    <Label text="Application Details"/>
+
+    <Label fx:id="companyLabel"/>
+    <Label fx:id="positionLabel"/>
+    <Label fx:id="categoryLabel"/>
+    <Label fx:id="applicationDateLabel"/>
+    <Label fx:id="sourceLabel"/>
+    <Label fx:id="statusLabel"/>
+    <Label fx:id="followUpDateLabel"/>
+    <Label fx:id="notesLabel"/>
+
+    <Button text="Edit"
+            onAction="#handleEdit"/>
+    <Button text="Delete"
+            onAction="#handleDelete"/>
+    <Button text="Back"
+            onAction="#handleBack"/>
+
+</VBox>
