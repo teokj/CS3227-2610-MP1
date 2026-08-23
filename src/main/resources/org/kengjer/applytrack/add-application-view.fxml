@@ -15,7 +15,8 @@
           layoutY="30.0"
           prefWidth="480.0">
 
-        <Label text="Add Application" />
+        <Label fx:id="formTitleLabel"
+               text="Add Application" />
 
         <Label text="Company" />
         <TextField fx:id="companyField"

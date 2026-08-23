@@ -33,4 +33,8 @@ public class ApplicationManager {
     public List<JobApplication> getApplications() {
         return applications;
     }
+
+    public void removeApplication(JobApplication application) {
+        applications.remove(application);
+    }
 }
