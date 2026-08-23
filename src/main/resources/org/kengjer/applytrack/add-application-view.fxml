@@ -1,63 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.kengjer.applytrack.AddApplicationController"
-            prefHeight="400.0" prefWidth="600.0">
-    <VBox spacing="12.0"
-          layoutX="60.0"
-          layoutY="30.0"
-          prefWidth="480.0">
+            fitToWidth="true"
+            prefHeight="650.0"
+            prefWidth="600.0">
 
-        <Label fx:id="formTitleLabel"
-               text="Add Application" />
+    <content>
+        <VBox spacing="12.0"
+              prefWidth="480.0">
 
-        <Label text="Company" />
-        <TextField fx:id="companyField"
-                   promptText="Enter company name" />
+            <padding>
+                <Insets top="30.0"
+                        right="60.0"
+                        bottom="30.0"
+                        left="60.0"/>
+            </padding>
 
-        <Label text="Position" />
-        <TextField fx:id="positionField"
-                   promptText="Enter position title" />
+            <Label fx:id="formTitleLabel"
+                   text="Add Application" />
 
-        <Label text="Category" />
-        <ComboBox fx:id="categoryComboBox"
-                  promptText="Select category" />
+            <Label text="Company" />
+            <TextField fx:id="companyField"
+                       promptText="Enter company name" />
 
-        <Label text="Application Date" />
-        <DatePicker fx:id="applicationDatePicker"
-                    promptText="Select application date" />
+            <Label text="Position" />
+            <TextField fx:id="positionField"
+                       promptText="Enter position title" />
 
-        <Label text="Source" />
-        <TextField fx:id="sourceField"
-                   promptText="Enter application source" />
+            <Label text="Category" />
+            <ComboBox fx:id="categoryComboBox"
+                      promptText="Select category" />
 
-        <Label text="Follow-up Date" />
-        <DatePicker fx:id="followUpDatePicker"
-                    promptText="Select follow-up date" />
+            <Label text="Status" />
+            <ComboBox fx:id="statusComboBox"
+                      promptText="Select status" />
 
-        <Label text="Notes" />
-        <TextArea fx:id="notesArea"
-                  promptText="Enter notes"
-                  prefRowCount="3" />
+            <Label text="Application Date" />
+            <DatePicker fx:id="applicationDatePicker"
+                        promptText="Select application date" />
 
-        <Label fx:id="errorLabel"
-               text=""
-               wrapText="true" />
+            <Label text="Source" />
+            <TextField fx:id="sourceField"
+                       promptText="Enter application source" />
 
-        <HBox spacing="12.0">
-            <Button text="Cancel"
-                    onAction="#handleCancel" />
-            <Button text="Save"
-                    onAction="#handleSave" />
-        </HBox>
+            <Label text="Follow-up Date" />
+            <DatePicker fx:id="followUpDatePicker"
+                        promptText="Select follow-up date" />
 
-    </VBox>
+            <Label text="Notes" />
+            <TextArea fx:id="notesArea"
+                      promptText="Enter notes"
+                      prefRowCount="3" />
 
-</AnchorPane>
+            <Label fx:id="errorLabel"
+                   text=""
+                   wrapText="true" />
+
+            <HBox spacing="12.0">
+                <Button text="Cancel"
+                        onAction="#handleCancel" />
+                <Button text="Save"
+                        onAction="#handleSave" />
+            </HBox>
+
+        </VBox>
+    </content>
+
+</ScrollPane>

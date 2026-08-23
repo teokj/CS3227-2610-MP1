@@ -17,9 +17,13 @@
     <Label fx:id="applicationDateLabel"/>
     <Label fx:id="sourceLabel"/>
     <Label fx:id="statusLabel"/>
+    <Label fx:id="starredLabel"/>
     <Label fx:id="followUpDateLabel"/>
     <Label fx:id="notesLabel"/>
 
+    <Button fx:id="starButton"
+            text="Star"
+            onAction="#handleStar"/>
     <Button text="Edit"
             onAction="#handleEdit"/>
     <Button text="Delete"
