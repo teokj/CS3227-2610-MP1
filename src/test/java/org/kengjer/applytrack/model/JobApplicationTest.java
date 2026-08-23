@@ -260,6 +260,16 @@ public class JobApplicationTest {
         assertEquals(LocalDate.of(2026, 8, 19), application.getApplicationDate());
     }
 
+    @Test
+    void setStatus_validStatus_updatesValue() {
+        JobApplication application = createValidApplication();
+
+        application.setStatus(ApplicationStatus.INTERVIEW);
+
+        assertEquals(ApplicationStatus.INTERVIEW, application.getStatus());
+    }
+
+
     private JobApplication createValidApplication() {
         return new JobApplication(
                 1,

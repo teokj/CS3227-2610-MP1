@@ -17,7 +17,7 @@ public class MainViewController {
         FXMLLoader fxmlLoader =
                 new FXMLLoader(HelloApplication.class.getResource("add-application-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load(), 600, 650);
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource())
                 .getScene()
@@ -34,8 +34,11 @@ public class MainViewController {
         for (JobApplication application :
                 HelloApplication.getApplicationManager().getApplications()) {
 
+            String starPrefix = application.isStarred() ? "★ " : "";
+
             Button applicationButton = new Button(
-                    application.getId() + ". "
+                    starPrefix
+                            + application.getId() + ". "
                             + application.getCompany() + " - "
                             + application.getPosition()
             );

@@ -10,6 +10,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import org.kengjer.applytrack.model.ApplicationStatus;
 import org.kengjer.applytrack.model.JobCategory;
 import org.kengjer.applytrack.model.JobApplication;
 
@@ -44,11 +45,18 @@ public class AddApplicationController {
     @FXML
     private Label formTitleLabel;
 
+    @FXML
+    private ComboBox<ApplicationStatus> statusComboBox;
+
     private JobApplication applicationToEdit;
 
     @FXML
     public void initialize() {
         categoryComboBox.getItems().setAll(JobCategory.values());
+
+        statusComboBox.getItems().setAll(ApplicationStatus.values());
+        statusComboBox.setValue(ApplicationStatus.APPLIED);
+        statusComboBox.setDisable(true);
     }
 
     @FXML
@@ -117,9 +125,14 @@ public class AddApplicationController {
             applicationToEdit.setCompany(companyField.getText());
             applicationToEdit.setPosition(positionField.getText());
             applicationToEdit.setCategory(categoryComboBox.getValue());
+            applicationToEdit.setStatus(statusComboBox.getValue());
+
+            // Temporarily clear the old follow-up date so both dates can be updated safely.
+            applicationToEdit.setFollowUpDate(null);
             applicationToEdit.setApplicationDate(applicationDatePicker.getValue());
-            applicationToEdit.setSource(sourceField.getText());
             applicationToEdit.setFollowUpDate(followUpDatePicker.getValue());
+
+            applicationToEdit.setSource(sourceField.getText());
             applicationToEdit.setNotes(notesArea.getText());
         }
 
@@ -143,6 +156,10 @@ public class AddApplicationController {
         companyField.setText(application.getCompany());
         positionField.setText(application.getPosition());
         categoryComboBox.setValue(application.getCategory());
+
+        statusComboBox.setDisable(false);
+        statusComboBox.setValue(application.getStatus());
+
         applicationDatePicker.setValue(application.getApplicationDate());
         sourceField.setText(application.getSource());
         followUpDatePicker.setValue(application.getFollowUpDate());
