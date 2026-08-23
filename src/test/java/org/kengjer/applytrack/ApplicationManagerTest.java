@@ -177,6 +177,50 @@ public class ApplicationManagerTest {
         assertEquals(2, second.getId());
     }
 
+    @Test
+    void filterState_defaultValues_areAllFilters() {
+        ApplicationManager manager = new ApplicationManager();
+
+        assertEquals("All statuses", manager.getSelectedStatusFilter());
+        assertEquals("All categories", manager.getSelectedCategoryFilter());
+    }
+
+    @Test
+    void setSelectedStatusFilter_validValue_updatesValue() {
+        ApplicationManager manager = new ApplicationManager();
+
+        manager.setSelectedStatusFilter("INTERVIEW");
+
+        assertEquals("INTERVIEW", manager.getSelectedStatusFilter());
+    }
+
+    @Test
+    void setSelectedCategoryFilter_validValue_updatesValue() {
+        ApplicationManager manager = new ApplicationManager();
+
+        manager.setSelectedCategoryFilter("TECHNOLOGY");
+
+        assertEquals("TECHNOLOGY", manager.getSelectedCategoryFilter());
+    }
+
+    @Test
+    void starredOnlyFilter_defaultValue_isFalse() {
+        ApplicationManager manager = new ApplicationManager();
+
+        assertFalse(manager.isStarredOnlyFilter());
+    }
+
+    @Test
+    void setStarredOnlyFilter_trueThenFalse_updatesValue() {
+        ApplicationManager manager = new ApplicationManager();
+
+        manager.setStarredOnlyFilter(true);
+        assertTrue(manager.isStarredOnlyFilter());
+
+        manager.setStarredOnlyFilter(false);
+        assertFalse(manager.isStarredOnlyFilter());
+    }
+
     private JobApplication addValidApplication(ApplicationManager manager, String company) {
         return manager.addApplication(
                 company,

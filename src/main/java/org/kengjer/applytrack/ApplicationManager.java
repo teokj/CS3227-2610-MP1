@@ -9,6 +9,9 @@ import java.util.List;
 public class ApplicationManager {
     private final List<JobApplication> applications = new ArrayList<>();
     private int nextId = 1;
+    private String selectedStatusFilter = "All statuses";
+    private String selectedCategoryFilter = "All categories";
+    private boolean starredOnlyFilter = false;
 
     public JobApplication addApplication(String company,
                                          String position,
@@ -36,5 +39,29 @@ public class ApplicationManager {
 
     public void removeApplication(JobApplication application) {
         applications.remove(application);
+    }
+
+    public String getSelectedStatusFilter() {
+        return selectedStatusFilter;
+    }
+
+    public void setSelectedStatusFilter(String selectedStatusFilter) {
+        this.selectedStatusFilter = selectedStatusFilter;
+    }
+
+    public String getSelectedCategoryFilter() {
+        return selectedCategoryFilter;
+    }
+
+    public void setSelectedCategoryFilter(String selectedCategoryFilter) {
+        this.selectedCategoryFilter = selectedCategoryFilter;
+    }
+
+    public boolean isStarredOnlyFilter() {
+        return starredOnlyFilter;
+    }
+
+    public void setStarredOnlyFilter(boolean starredOnlyFilter) {
+        this.starredOnlyFilter = starredOnlyFilter;
     }
 }

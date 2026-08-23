@@ -2,8 +2,10 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.CheckBox?>
 
 <VBox alignment="CENTER"
       spacing="20.0"
@@ -17,6 +19,17 @@
     <Label text="Track all your job applications&#10;in one place!" textAlignment="CENTER"/>
     <Button text="Add Application"
             onAction="#handleAddApplication"/>
+    <Label text="Filter by Status" />
+    <ComboBox fx:id="statusFilterComboBox"
+              promptText="All statuses" />
+
+    <Label text="Filter by Category" />
+    <ComboBox fx:id="categoryFilterComboBox"
+              promptText="All categories" />
+    <CheckBox fx:id="starredFilterCheckBox"
+              text="Starred only" />
+    <Button text="Reset Filters"
+            onAction="#handleResetFilters"/>
     <VBox fx:id="applicationListBox"
           spacing="8.0"
           alignment="CENTER" />
