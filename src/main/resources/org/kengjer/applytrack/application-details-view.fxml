@@ -19,6 +19,7 @@
     <Label fx:id="statusLabel"/>
     <Label fx:id="starredLabel"/>
     <Label fx:id="followUpDateLabel"/>
+    <Label fx:id="followUpStatusLabel" />
     <Label fx:id="notesLabel"/>
 
     <Button fx:id="starButton"

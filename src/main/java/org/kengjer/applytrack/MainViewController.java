@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.CheckBox;
+import java.time.LocalDate;
+import org.kengjer.applytrack.model.FollowUpStatus;
 import org.kengjer.applytrack.model.ApplicationStatus;
 import org.kengjer.applytrack.model.JobCategory;
 import org.kengjer.applytrack.model.JobApplication;
@@ -40,6 +42,9 @@ public class MainViewController {
     private ComboBox<String> categoryFilterComboBox;
 
     @FXML
+    private ComboBox<String> followUpFilterComboBox;
+
+    @FXML
     private CheckBox starredFilterCheckBox;
 
     @FXML
@@ -54,10 +59,18 @@ public class MainViewController {
             categoryFilterComboBox.getItems().add(category.name());
         }
 
+        followUpFilterComboBox.getItems().add("All follow-ups");
+        for (FollowUpStatus status : FollowUpStatus.values()) {
+            followUpFilterComboBox.getItems().add(
+                    status.name().replace("_", " ")
+            );
+        }
+
         ApplicationManager manager = HelloApplication.getApplicationManager();
 
         statusFilterComboBox.setValue(manager.getSelectedStatusFilter());
         categoryFilterComboBox.setValue(manager.getSelectedCategoryFilter());
+        followUpFilterComboBox.setValue(manager.getSelectedFollowUpFilter());
 
         starredFilterCheckBox.setSelected(manager.isStarredOnlyFilter());
 
@@ -68,6 +81,11 @@ public class MainViewController {
 
         categoryFilterComboBox.setOnAction(event -> {
             manager.setSelectedCategoryFilter(categoryFilterComboBox.getValue());
+            displayApplications();
+        });
+
+        followUpFilterComboBox.setOnAction(event -> {
+            manager.setSelectedFollowUpFilter(followUpFilterComboBox.getValue());
             displayApplications();
         });
 
@@ -84,6 +102,7 @@ public class MainViewController {
 
         String selectedStatus = statusFilterComboBox.getValue();
         String selectedCategory = categoryFilterComboBox.getValue();
+        String selectedFollowUp = followUpFilterComboBox.getValue();
         boolean starredOnly = starredFilterCheckBox.isSelected();
 
         for (JobApplication application :
@@ -103,6 +122,30 @@ public class MainViewController {
                 continue;
             }
 
+            FollowUpStatus followUpStatus =
+                    application.getFollowUpStatus(LocalDate.now());
+            if (!selectedFollowUp.equals("All follow-ups")
+                    && followUpStatus != FollowUpStatus.valueOf(
+                    selectedFollowUp.replace(" ", "_"))) {
+                continue;
+            }
+
+            String followUpSuffix = "";
+
+            switch (followUpStatus) {
+                case OVERDUE:
+                    followUpSuffix = " [⚠ OVERDUE]";
+                    break;
+                case DUE_TODAY:
+                    followUpSuffix = " [DUE TODAY]";
+                    break;
+                case UPCOMING:
+                    followUpSuffix = " [UPCOMING]";
+                    break;
+                default:
+                    break;
+            }
+
             String starPrefix = application.isStarred() ? "★ " : "";
 
             Button applicationButton = new Button(
@@ -110,6 +153,7 @@ public class MainViewController {
                             + application.getId() + ". "
                             + application.getCompany() + " - "
                             + application.getPosition()
+                            + followUpSuffix
             );
 
             applicationButton.setOnAction(event -> {
@@ -118,7 +162,7 @@ public class MainViewController {
                             new FXMLLoader(HelloApplication.class.getResource(
                                     "application-details-view.fxml"));
 
-                    Scene scene = new Scene(fxmlLoader.load());
+                    Scene scene = new Scene(fxmlLoader.load(), 600, 650);
 
                     ApplicationDetailsController controller =
                             fxmlLoader.getController();
@@ -134,6 +178,7 @@ public class MainViewController {
                 }
             });
 
+            applicationButton.setMaxWidth(Double.MAX_VALUE);
             applicationListBox.getChildren().add(applicationButton);
         }
     }
@@ -142,6 +187,7 @@ public class MainViewController {
     public void handleResetFilters() {
         statusFilterComboBox.setValue("All statuses");
         categoryFilterComboBox.setValue("All categories");
+        followUpFilterComboBox.setValue("All follow-ups");
         starredFilterCheckBox.setSelected(false);
 
         HelloApplication.getApplicationManager()

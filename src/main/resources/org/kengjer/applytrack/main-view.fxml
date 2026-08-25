@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
 
 <VBox alignment="CENTER"
       spacing="20.0"
@@ -26,11 +27,24 @@
     <Label text="Filter by Category" />
     <ComboBox fx:id="categoryFilterComboBox"
               promptText="All categories" />
+
+    <Label text="Filter by Follow-up" />
+    <ComboBox fx:id="followUpFilterComboBox"
+              promptText="All follow-ups" />
+
     <CheckBox fx:id="starredFilterCheckBox"
               text="Starred only" />
+
     <Button text="Reset Filters"
             onAction="#handleResetFilters"/>
-    <VBox fx:id="applicationListBox"
-          spacing="8.0"
-          alignment="CENTER" />
+
+    <ScrollPane fitToWidth="true"
+                prefHeight="220"
+                maxWidth="520">
+        <content>
+            <VBox fx:id="applicationListBox"
+                  spacing="8.0"
+                  alignment="CENTER" />
+        </content>
+    </ScrollPane>
 </VBox>

@@ -269,6 +269,81 @@ public class JobApplicationTest {
         assertEquals(ApplicationStatus.INTERVIEW, application.getStatus());
     }
 
+    @Test
+    void getFollowUpStatus_noFollowUpDate_returnsNone() {
+        JobApplication application = createValidApplication();
+
+        FollowUpStatus status =
+                application.getFollowUpStatus(LocalDate.of(2026, 8, 25));
+
+        assertEquals(FollowUpStatus.NONE, status);
+    }
+
+    @Test
+    void getFollowUpStatus_followUpBeforeToday_returnsOverdue() {
+        JobApplication application = createValidApplication();
+        application.setFollowUpDate(LocalDate.of(2026, 8, 24));
+
+        FollowUpStatus status =
+                application.getFollowUpStatus(LocalDate.of(2026, 8, 25));
+
+        assertEquals(FollowUpStatus.OVERDUE, status);
+    }
+
+    @Test
+    void getFollowUpStatus_followUpToday_returnsDueToday() {
+        JobApplication application = createValidApplication();
+        application.setFollowUpDate(LocalDate.of(2026, 8, 25));
+
+        FollowUpStatus status =
+                application.getFollowUpStatus(LocalDate.of(2026, 8, 25));
+
+        assertEquals(FollowUpStatus.DUE_TODAY, status);
+    }
+
+    @Test
+    void getFollowUpStatus_followUpTomorrow_returnsUpcoming() {
+        JobApplication application = createValidApplication();
+        application.setFollowUpDate(LocalDate.of(2026, 8, 26));
+
+        FollowUpStatus status =
+                application.getFollowUpStatus(LocalDate.of(2026, 8, 25));
+
+        assertEquals(FollowUpStatus.UPCOMING, status);
+    }
+
+    @Test
+    void getFollowUpStatus_followUpExactlySevenDaysLater_returnsUpcoming() {
+        JobApplication application = createValidApplication();
+        application.setFollowUpDate(LocalDate.of(2026, 9, 1));
+
+        FollowUpStatus status =
+                application.getFollowUpStatus(LocalDate.of(2026, 8, 25));
+
+        assertEquals(FollowUpStatus.UPCOMING, status);
+    }
+
+    @Test
+    void getFollowUpStatus_followUpEightDaysLater_returnsFuture() {
+        JobApplication application = createValidApplication();
+        application.setFollowUpDate(LocalDate.of(2026, 9, 2));
+
+        FollowUpStatus status =
+                application.getFollowUpStatus(LocalDate.of(2026, 8, 25));
+
+        assertEquals(FollowUpStatus.FUTURE, status);
+    }
+
+    @Test
+    void getFollowUpStatus_nullToday_throwsIllegalArgumentException() {
+        JobApplication application = createValidApplication();
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> application.getFollowUpStatus(null)
+        );
+    }
+
 
     private JobApplication createValidApplication() {
         return new JobApplication(

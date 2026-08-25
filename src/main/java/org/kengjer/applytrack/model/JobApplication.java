@@ -160,5 +160,29 @@ public class JobApplication {
             this.notes = notes;
         }
     }
+
+    public FollowUpStatus getFollowUpStatus(LocalDate today) {
+        if (today == null) {
+            throw new IllegalArgumentException("Today cannot be null.");
+        }
+
+        if (followUpDate == null) {
+            return FollowUpStatus.NONE;
+        }
+
+        if (followUpDate.isBefore(today)) {
+            return FollowUpStatus.OVERDUE;
+        }
+
+        if (followUpDate.isEqual(today)) {
+            return FollowUpStatus.DUE_TODAY;
+        }
+
+        if (!followUpDate.isAfter(today.plusDays(7))) {
+            return FollowUpStatus.UPCOMING;
+        }
+
+        return FollowUpStatus.FUTURE;
+    }
 }
 
