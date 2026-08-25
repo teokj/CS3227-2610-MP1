@@ -10,6 +10,8 @@ import java.io.IOException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
+import java.time.LocalDate;
+import org.kengjer.applytrack.model.FollowUpStatus;
 import org.kengjer.applytrack.model.JobApplication;
 
 public class ApplicationDetailsController {
@@ -44,6 +46,9 @@ public class ApplicationDetailsController {
     @FXML
     private Label starredLabel;
 
+    @FXML
+    private Label followUpStatusLabel;
+
     private JobApplication application;
 
     void setApplication(JobApplication application) {
@@ -68,6 +73,26 @@ public class ApplicationDetailsController {
             followUpDateLabel.setText("Follow-up Date: None");
         } else {
             followUpDateLabel.setText("Follow-up Date: " + application.getFollowUpDate());
+        }
+
+        FollowUpStatus followUpStatus =
+                application.getFollowUpStatus(LocalDate.now());
+        switch (followUpStatus) {
+            case NONE:
+                followUpStatusLabel.setText("Follow-up Status: None");
+                break;
+            case OVERDUE:
+                followUpStatusLabel.setText("Follow-up Status: OVERDUE");
+                break;
+            case DUE_TODAY:
+                followUpStatusLabel.setText("Follow-up Status: DUE TODAY");
+                break;
+            case UPCOMING:
+                followUpStatusLabel.setText("Follow-up Status: UPCOMING");
+                break;
+            case FUTURE:
+                followUpStatusLabel.setText("Follow-up Status: FUTURE");
+                break;
         }
 
         if (application.getNotes().isBlank()) {

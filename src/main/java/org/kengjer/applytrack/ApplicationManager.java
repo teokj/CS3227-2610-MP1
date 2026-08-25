@@ -11,6 +11,7 @@ public class ApplicationManager {
     private int nextId = 1;
     private String selectedStatusFilter = "All statuses";
     private String selectedCategoryFilter = "All categories";
+    private String selectedFollowUpFilter = "All follow-ups";
     private boolean starredOnlyFilter = false;
 
     public JobApplication addApplication(String company,
@@ -55,6 +56,14 @@ public class ApplicationManager {
 
     public void setSelectedCategoryFilter(String selectedCategoryFilter) {
         this.selectedCategoryFilter = selectedCategoryFilter;
+    }
+
+    public String getSelectedFollowUpFilter() {
+        return selectedFollowUpFilter;
+    }
+
+    public void setSelectedFollowUpFilter(String selectedFollowUpFilter) {
+        this.selectedFollowUpFilter = selectedFollowUpFilter;
     }
 
     public boolean isStarredOnlyFilter() {

@@ -221,6 +221,22 @@ public class ApplicationManagerTest {
         assertFalse(manager.isStarredOnlyFilter());
     }
 
+    @Test
+    void followUpFilter_defaultValue_isAllFollowUps() {
+        ApplicationManager manager = new ApplicationManager();
+
+        assertEquals("All follow-ups", manager.getSelectedFollowUpFilter());
+    }
+
+    @Test
+    void setSelectedFollowUpFilter_validValue_updatesValue() {
+        ApplicationManager manager = new ApplicationManager();
+
+        manager.setSelectedFollowUpFilter("OVERDUE");
+
+        assertEquals("OVERDUE", manager.getSelectedFollowUpFilter());
+    }
+
     private JobApplication addValidApplication(ApplicationManager manager, String company) {
         return manager.addApplication(
                 company,
