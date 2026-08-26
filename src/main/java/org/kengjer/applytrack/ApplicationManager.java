@@ -34,6 +34,14 @@ public class ApplicationManager {
         return application;
     }
 
+    public void loadApplication(JobApplication application) {
+        applications.add(application);
+
+        if (application.getId() >= nextId) {
+            nextId = application.getId() + 1;
+        }
+    }
+
     public List<JobApplication> getApplications() {
         return applications;
     }
