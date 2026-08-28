@@ -10,9 +10,11 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     private static final ApplicationManager applicationManager = new ApplicationManager();
     private static final Storage storage = new Storage();
+
     public static ApplicationManager getApplicationManager() {
         return applicationManager;
     }
+
     @Override
     public void start(Stage stage) throws IOException {
         storage.loadApplications(applicationManager);

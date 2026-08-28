@@ -3,16 +3,16 @@ package org.kengjer.applytrack;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
-import javafx.stage.Stage;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import org.kengjer.applytrack.model.ApplicationStatus;
-import org.kengjer.applytrack.model.JobCategory;
 import org.kengjer.applytrack.model.JobApplication;
+import org.kengjer.applytrack.model.JobCategory;
 
 import java.io.IOException;
 
@@ -64,13 +64,13 @@ public class AddApplicationController {
         FXMLLoader fxmlLoader =
                 new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+        Parent root = fxmlLoader.load();
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource())
                 .getScene()
                 .getWindow();
 
-        stage.setScene(scene);
+        stage.getScene().setRoot(root);
     }
 
     @FXML
@@ -139,13 +139,13 @@ public class AddApplicationController {
         FXMLLoader fxmlLoader =
                 new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+        Parent root = fxmlLoader.load();
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource())
                 .getScene()
                 .getWindow();
 
-        stage.setScene(scene);
+        stage.getScene().setRoot(root);
     }
 
     void setApplicationToEdit(JobApplication application) {

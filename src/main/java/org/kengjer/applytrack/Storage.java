@@ -1,21 +1,18 @@
 package org.kengjer.applytrack;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import org.kengjer.applytrack.model.JobApplication;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.kengjer.applytrack.model.ApplicationStatus;
+import org.kengjer.applytrack.model.JobApplication;
 import org.kengjer.applytrack.model.JobCategory;
 
-import java.time.LocalDate;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 public class Storage {
     private final Path saveFile;
