@@ -1,18 +1,19 @@
 package org.kengjer.applytrack;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import java.io.IOException;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
-import java.time.LocalDate;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import org.kengjer.applytrack.model.FollowUpStatus;
 import org.kengjer.applytrack.model.JobApplication;
+
+import java.io.IOException;
+import java.time.LocalDate;
 
 public class ApplicationDetailsController {
 
@@ -107,7 +108,7 @@ public class ApplicationDetailsController {
         FXMLLoader fxmlLoader =
                 new FXMLLoader(HelloApplication.class.getResource("add-application-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 600, 650);
+        Parent root = fxmlLoader.load();
 
         AddApplicationController controller = fxmlLoader.getController();
         controller.setApplicationToEdit(application);
@@ -116,7 +117,7 @@ public class ApplicationDetailsController {
                 .getScene()
                 .getWindow();
 
-        stage.setScene(scene);
+        stage.getScene().setRoot(root);
     }
 
     @FXML
@@ -138,13 +139,13 @@ public class ApplicationDetailsController {
                     FXMLLoader fxmlLoader =
                             new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
 
-                    Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+                    Parent root = fxmlLoader.load();
 
                     Stage stage = (Stage) ((javafx.scene.Node) event.getSource())
                             .getScene()
                             .getWindow();
 
-                    stage.setScene(scene);
+                    stage.getScene().setRoot(root);
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -158,13 +159,13 @@ public class ApplicationDetailsController {
         FXMLLoader fxmlLoader =
                 new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 600, 500);
+        Parent root = fxmlLoader.load();
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource())
                 .getScene()
                 .getWindow();
 
-        stage.setScene(scene);
+        stage.getScene().setRoot(root);
     }
 
     @FXML

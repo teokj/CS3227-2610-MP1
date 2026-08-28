@@ -1,35 +1,36 @@
 package org.kengjer.applytrack;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.CheckBox;
-import java.time.LocalDate;
-import org.kengjer.applytrack.model.FollowUpStatus;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.kengjer.applytrack.model.ApplicationStatus;
-import org.kengjer.applytrack.model.JobCategory;
+import org.kengjer.applytrack.model.FollowUpStatus;
 import org.kengjer.applytrack.model.JobApplication;
+import org.kengjer.applytrack.model.JobCategory;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class MainViewController {
 
+    @FXML
     public void handleAddApplication(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader =
                 new FXMLLoader(HelloApplication.class.getResource("add-application-view.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load(), 600, 650);
+        Parent root = fxmlLoader.load();
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource())
                 .getScene()
                 .getWindow();
 
-        stage.setScene(scene);
+        stage.getScene().setRoot(root);
     }
 
     @FXML
@@ -162,7 +163,7 @@ public class MainViewController {
                             new FXMLLoader(HelloApplication.class.getResource(
                                     "application-details-view.fxml"));
 
-                    Scene scene = new Scene(fxmlLoader.load(), 600, 650);
+                    Parent root = fxmlLoader.load();
 
                     ApplicationDetailsController controller =
                             fxmlLoader.getController();
@@ -171,7 +172,7 @@ public class MainViewController {
                     Stage stage =
                             (Stage) applicationButton.getScene().getWindow();
 
-                    stage.setScene(scene);
+                    stage.getScene().setRoot(root);
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);
