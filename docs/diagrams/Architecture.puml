@@ -1,0 +1,33 @@
+@startuml
+
+top to bottom direction
+
+class Launcher
+class HelloApplication
+class ApplicationManager
+class Storage
+class JobApplication
+
+package "JavaFX Controllers" {
+    class MainViewController
+    class AddApplicationController
+    class ApplicationDetailsController
+}
+
+Launcher --> HelloApplication : calls
+
+HelloApplication --> ApplicationManager : uses
+HelloApplication --> Storage : uses
+
+MainViewController --> ApplicationManager : accesses
+AddApplicationController --> ApplicationManager : accesses
+ApplicationDetailsController --> ApplicationManager : accesses
+
+ApplicationManager "1" --> "0..*" JobApplication : contains
+
+AddApplicationController --> JobApplication : creates / modifies
+ApplicationDetailsController --> JobApplication : displays / modifies
+
+Storage --> JobApplication : saves / loads
+
+@enduml
