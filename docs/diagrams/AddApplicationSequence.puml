@@ -1,0 +1,26 @@
+@startuml
+
+actor User
+participant MainViewController
+participant AddApplicationController
+participant ApplicationManager
+participant JobApplication
+
+User -> MainViewController : click Add Application
+MainViewController -> AddApplicationController : load add form
+
+User -> AddApplicationController : enter application details
+User -> AddApplicationController : click Save
+
+AddApplicationController -> AddApplicationController : validate input
+AddApplicationController -> ApplicationManager : addApplication(...)
+ApplicationManager -> JobApplication : create application
+JobApplication --> ApplicationManager : new application
+ApplicationManager --> AddApplicationController : application
+
+AddApplicationController -> JobApplication : set follow-up date
+AddApplicationController -> JobApplication : set notes
+
+AddApplicationController --> MainViewController : return to main screen
+
+@enduml

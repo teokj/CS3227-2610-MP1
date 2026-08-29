@@ -1,0 +1,36 @@
+@startuml
+
+participant HelloApplication
+participant Storage
+participant ApplicationManager
+participant JobApplication
+database "data/applications.txt" as DataFile
+
+== Application Start ==
+
+HelloApplication -> Storage : loadApplications(manager)
+Storage -> DataFile : read saved records
+DataFile --> Storage : saved data
+
+loop for each valid record
+    Storage -> JobApplication : create application
+    JobApplication --> Storage : application
+    Storage -> ApplicationManager : loadApplication(application)
+end
+
+Storage --> HelloApplication : loading complete
+
+== Application Close ==
+
+HelloApplication -> Storage : saveApplications(applications)
+
+loop for each application
+    Storage -> JobApplication : read field values
+    JobApplication --> Storage : application data
+end
+
+Storage -> DataFile : write records
+DataFile --> Storage : save complete
+Storage --> HelloApplication : saving complete
+
+@enduml
